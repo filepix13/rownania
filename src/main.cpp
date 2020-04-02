@@ -4,27 +4,23 @@
 #include "UkladRownanLiniowych.hh"
 
 
-/*
- * Tu definiujemy pozostale funkcje.
- * Lepiej jednak stworzyc dodatkowy modul
- * i tam je umiescic. Ten przyklad pokazuje
- * jedynie absolutne minimum.
- */
-
-
 int main()
 {
-  Wektor Wek1(1,2,3);
-  Wektor Wek2(4,5,6);
-  Wektor Wek3(7,8,9);
-
-  Macierz Ma(Wek1,Wek2,Wek3);
   Macierz M;
+  Wektor W;
 
-  M = Ma.transpozycja();
+  std::cout << "Macierz A^T:" << std::endl;
+  std::cin >> M;
+  std::cout << std::endl << "Wektor wyrazów wolnych b:" << std::endl;
+  std::cin >> W;
 
-  //std::cout << Ma.transpozycja();
+  UkladRownanLiniowych U(M,W);
+  
+  std::cout << std::endl <<"Rozwiazanie x = (x1, x2, x3):" << std::endl;
 
+  std::cout << U.Oblicz() << std::endl;
 
-  std::cout << std::endl << " Start programu " << std::endl << std::endl;
+  std::cout << "Wektor błędu: Ax-B = " << U.Blad();
+  std::cout << "Długość wektora błędu: |Ax-B| = " << U.DlugoscBledu() << std::endl;
+
 }

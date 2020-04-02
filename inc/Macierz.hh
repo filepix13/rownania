@@ -6,9 +6,12 @@
 #include <iostream>
 
 
+//Uławtwia konstuowanie macierzy 
+enum Operator {a, b, c, d, e, f, g, h, i};
+
+
 /*
- *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
- *  i jakie ma glowne cechy.
+  Klasa Macierz modeluje pojęcie macierzy kwadratowej o ROZMIAR kolumnach i ROZMIAR wierszach
  */
 class Macierz 
 {
@@ -17,54 +20,60 @@ class Macierz
 
   public:
 
+  //Deklaracja konstruktora
   Macierz();
-  Macierz(Wektor Wek1, Wektor Wek2, Wektor Wek3);
-  Macierz(double a, double b, double c, double d, double e, double f, double g, double h, double i);
-  const Wektor & operator[] (int indeks) const;
-  Wektor & operator[] (int indeks);
-  const Macierz & transpozycja() const;
-  /*
-  
 
+  //Deklaracja konstruktora parametrycznego(3 wektory)
+  Macierz(Wektor Wek1, Wektor Wek2, Wektor Wek3);
+
+  //Deklaracja konstruktora parametrycznego(9 liczb rzeczywistych)
+  Macierz(double a, double b, double c, double d, double e, double f, double g, double h, double i);
+
+  //Deklaracja przeciążenia operatora indeksującego(const)
+  const Wektor & operator[] (int indeks) const;
+
+  //Deklaracja przeciążenia operatora indeksującego
+  Wektor & operator[] (int indeks);
+
+  //Deklaracja przeciążnie operatora funkcyjnego(const)
   const double & operator() (int ind1, int ind2) const;
+
+  //Deklaracja przeciążnie operatora funkcyjnego
   double & operator() (int ind1, int ind2);
 
-  const Wektor & wez_kolumne(int ind) const;//pomocnicze, analogicznie dla wiersza i dla zmien
-  Wektor & wez_kolumne(int ind);
-  
-  void odwrotnosc(); //1.
-  const Macierz & odwrotnosc() const; //2.
-  
+  //Deklaracja funkcji transponującej macierz(const)
+  const Macierz transpozycja2() const;
+
+  //Deklaracja funkcji transponującej macierz
+  void transpozycja();
+
+  //Deklaracja funkcji obliczającej wyznacznik macierzy(const)
   double Wyznacznik() const;
-  // Laplace, Gauss, Sarrus
-  double WyznacznikGauss() const;
-  double Wyznacznik(Gauss) const; //enum
-  
-  void transpozycja(); //1.
-  const Macierz & transpozycja() const; //2.
-  
-  const Macierz & operator + (const Macierz & W) const; 
-  const Macierz & operator - (const Macierz & W) const; 
-  const Macierz & operator * (const Macierz & W) const;  
-*/
+
+  //Deklaracja funkcji obliczającej macierz odwrotną(const)
+  const Macierz odwrotnosc() const;
+
+  //Deklaracja funkcji dodającej dwie macierze(const)
+  const Macierz operator + (const Macierz & M) const;
+
+  //Deklaracja funkcji odejmującej dwie macierze(const) 
+  const Macierz operator - (const Macierz & M) const;
+
+  //Deklaracja funkcji mnożącej dwie macierze 
+  const Macierz operator * (const Macierz & M) const;
+
+  //Deklaracja funkcji mnożącej macierz i wektor
+  const Wektor operator * (const Wektor & W) const;  
 };
 
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
+/* 
+  Funkcja wczytująca macierz ze strumienia wejściowego
+*/
 std::istream& operator >> (std::istream &Strm, Macierz &Mac);
 
 /*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
+  Funkcja wyświetlająca macierz na strumień wejściowy
  */
 std::ostream& operator << (std::ostream &Strm, const Macierz &Mac);
 
