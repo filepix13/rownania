@@ -193,9 +193,9 @@ double Macierz::Wyznacznik() const
 {
     double d;
 
-    d = this->tab[0][0]*(this->tab[1][1]*this->tab[2][2]-this->tab[2][1]*this->tab[1][2]);
-    d += -(this->tab[0][1]*(this->tab[1][0]*this->tab[2][2]-this->tab[2][0]*this->tab[1][2]));
-    d += this->tab[0][2]*(this->tab[1][0]*this->tab[2][1]-this->tab[2][0]*this->tab[1][1]);
+    d = pow(-1, 2) * this->tab[0][0]*(this->tab[1][1]*this->tab[2][2]-this->tab[2][1]*this->tab[1][2]);
+    d += pow(-1, 3) * this->tab[0][1]*(this->tab[1][0]*this->tab[2][2]-this->tab[2][0]*this->tab[1][2]);
+    d += pow(-1, 4) * this->tab[0][2]*(this->tab[1][0]*this->tab[2][1]-this->tab[2][0]*this->tab[1][1]);
 
     return d;
 }
@@ -212,6 +212,12 @@ const Macierz Macierz::odwrotnosc() const
 {
     Macierz Mac;
     double det;
+
+    if(this->Wyznacznik() == 0)
+    {
+        std::cerr << "Wyznacznik równy zero, brak możliwości obliczenia odwrotności" << std::endl << "Zamykanie programu...";
+        exit(1);
+    }
 
     det = 1/this->Wyznacznik();
 

@@ -43,11 +43,18 @@ Wektor UkladRownanLiniowych::Oblicz() const
     Macierz MaX, MaY, MaZ;
     double det, detX, detY, detZ;
 
+    det = this->A.Wyznacznik();
+
+    if(det == 0)
+    {
+        std::cerr << "Wyznacznik równy zero, brak możliwości obliczenia równania." << std::endl << "Zamykanie programu...";
+        exit(1);
+    }
+
     MaX = this->ZamienX();
     MaY = this->ZamienY();
     MaZ = this->ZamienZ();
 
-    det = this->A.Wyznacznik();
     detX = MaX.Wyznacznik();
     detY = MaY.Wyznacznik();
     detZ = MaZ.Wyznacznik();
