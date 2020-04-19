@@ -12,9 +12,10 @@
 */
 Wektor::Wektor()
 {
-    dane[0] = 0.0;
-    dane[1] = 0.0;
-    dane[2] = 0.0;
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        dane[i]=0;
+    }
 }
 
 
@@ -63,13 +64,14 @@ double Wektor::dlugosc() const
     Zwraca:
         W - suma dwóch wektorów
 */
-const Wektor Wektor::operator + (const Wektor & W2) const
+Wektor Wektor::operator + (const Wektor & W2) const
 {
     Wektor W;
 
-    W.dane[0] = this->dane[0] + W2.dane[0];
-    W.dane[1] = this->dane[1] + W2.dane[1];
-    W.dane[2] = this->dane[2] + W2.dane[2];
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        W.dane[i] = this->dane[i] + W2.dane[i];
+    }
 
     return W;
 }
@@ -83,15 +85,37 @@ const Wektor Wektor::operator + (const Wektor & W2) const
     Zwraca:
         W - różnica dwóch wektorów
 */
-const Wektor Wektor::operator - (const Wektor & W2) const
+Wektor Wektor::operator - (const Wektor & W2) const
 {
     Wektor W;
 
-    W.dane[0] = this->dane[0] - W2.dane[0];
-    W.dane[1] = this->dane[1] - W2.dane[1];
-    W.dane[2] = this->dane[2] - W2.dane[2];
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        W.dane[i] = this->dane[i] - W2.dane[i];
+    }
 
     return W;
+}
+
+
+/* 
+    Funkcja ta oblicza iloczyn sklarny dwóch wektorów
+    Argumenty:
+        this
+        W2 - drugi wektor
+    Zwraca:
+        Iloczyn skalarny(double)
+*/
+double Wektor::operator * (const Wektor & W2) const
+{
+    double d;
+
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        d += dane[i] * W2.dane[i];
+    }
+
+    return d;
 }
 
 
@@ -141,7 +165,10 @@ double & Wektor::operator[] (int indeks)
 */
 std::istream& operator >> (std::istream &Strm, Wektor &Wek)
 {
-    Strm >> Wek[0] >> Wek[1] >> Wek[2];
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Strm >> Wek[i];
+    }
 
     if(std::cin.fail())
     {
@@ -163,5 +190,12 @@ std::istream& operator >> (std::istream &Strm, Wektor &Wek)
 */
 std::ostream& operator << (std::ostream &Strm, const Wektor &Wek)
 {
-    return Strm << Wek[0] << "  " <<Wek[1] << "  " << Wek[2] << std::endl;
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Strm << Wek[i] << "  ";
+    }
+
+    Strm << std::endl;
+
+    return Strm;
 }

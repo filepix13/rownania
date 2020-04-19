@@ -28,31 +28,31 @@ class UkladRownanLiniowych
   Wektor Oblicz() const;
 
   //Deklaracja funkcji zamieniającej pierwszą kolumnę macierzy na wektor
-  const Macierz ZamienX() const;
+  Macierz ZamienX() const;
 
   //Deklaracja funkcji zamieniającej drugą kolumnę macierzy na wektor
-  const Macierz ZamienY() const;
+  Macierz ZamienY() const;
 
   //Deklaracja funkcji zamieniającej trzecią kolumnę macierzy na wektor
-  const Macierz ZamienZ() const;
+  Macierz ZamienZ() const;
 
   //Deklaracja funkcji przekazującej nam macierz z klasy do odczytu
-  const Macierz wez_macierz() const;
+  Macierz wez_macierz() const;
 
   //Deklaracja funkcji przekazującej nam macierz z klasy do zapisu
   void zmien_macierz(Macierz M);
 
   //Deklaracja funkcji przekazującej nam wektor z klasy do odczytu
-  const Wektor wez_wektor() const;
+  Wektor wez_wektor() const;
 
   //Deklaracja funkcji przekazującej nam wektor z klasy do zapisu
   void zmien_wektor(Wektor W);
 
   //Deklaracja funkcji obliczającej wektor błędu
-  const Wektor Blad() const;
+  Wektor Blad() const;
 
   //Deklaracja funkcji obliczającej długość wektora błędu
-  const double DlugoscBledu() const;
+  double DlugoscBledu() const;
 };
 
 

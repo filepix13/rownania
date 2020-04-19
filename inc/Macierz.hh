@@ -4,10 +4,11 @@
 #include "Wektor.hh"
 #include "rozmiar.hh"
 #include <iostream>
+#include <algorithm> 
 
 
 //Uławtwia konstuowanie macierzy 
-enum Operator {a, b, c, d, e, f, g, h, i};
+enum Operator{a, b, c, d, e, f, g, h, i};
 
 
 /*
@@ -42,7 +43,7 @@ class Macierz
   double & operator() (int ind1, int ind2);
 
   //Deklaracja funkcji transponującej macierz(const)
-  const Macierz transpozycja2() const;
+  Macierz transpozycja2() const;
 
   //Deklaracja funkcji transponującej macierz
   void transpozycja();
@@ -51,19 +52,19 @@ class Macierz
   double Wyznacznik() const;
 
   //Deklaracja funkcji obliczającej macierz odwrotną(const)
-  const Macierz odwrotnosc() const;
+  Macierz odwrotnosc() const;
 
   //Deklaracja funkcji dodającej dwie macierze(const)
-  const Macierz operator + (const Macierz & M) const;
+  Macierz operator + (const Macierz & M) const;
 
   //Deklaracja funkcji odejmującej dwie macierze(const) 
-  const Macierz operator - (const Macierz & M) const;
+  Macierz operator - (const Macierz & M) const;
 
   //Deklaracja funkcji mnożącej dwie macierze 
-  const Macierz operator * (const Macierz & M) const;
+  Macierz operator * (const Macierz & M) const;
 
   //Deklaracja funkcji mnożącej macierz i wektor
-  const Wektor operator * (const Wektor & W) const;  
+  Wektor operator * (const Wektor & W) const;  
 };
 
 

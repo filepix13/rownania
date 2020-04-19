@@ -26,10 +26,13 @@ class Wektor
   double dlugosc() const;
 
   //Deklaracja funkcji dodającej dwa wektory
-  const Wektor operator + (const Wektor & W2) const;
+  Wektor operator + (const Wektor & W2) const;
 
   //Deklaracja funkcji odejmującej dwa wektory
-  const Wektor operator - (const Wektor & W2) const;
+  Wektor operator - (const Wektor & W2) const;
+
+  //Deklaracja funckji obliczającej iloczyn skalarny dwóch wektorów
+  double operator * (const Wektor & W2) const;
 
   //Deklaracja przeciążenia funkcji indeksującej
   const double & operator [] (int indeks) const;

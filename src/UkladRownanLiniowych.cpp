@@ -74,13 +74,14 @@ Wektor UkladRownanLiniowych::Oblicz() const
     Zwraca:
         M - macierz z zamienioną pierwszą kolumną
 */
-const Macierz UkladRownanLiniowych::ZamienX() const
+Macierz UkladRownanLiniowych::ZamienX() const
 {
     Macierz M = this->A;
 
-    M[0][0] = this->B[0];
-    M[1][0] = this->B[1];
-    M[2][0] = this->B[2];
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        M[i][0] = this->B[i];
+    }
 
     return M;
 }
@@ -93,13 +94,14 @@ const Macierz UkladRownanLiniowych::ZamienX() const
     Zwraca:
         M - macierz z zamienioną drugą kolumną
 */
-const Macierz UkladRownanLiniowych::ZamienY() const
+Macierz UkladRownanLiniowych::ZamienY() const
 {
     Macierz M = this->A;
 
-    M[0][1] = this->B[0];
-    M[1][1] = this->B[1];
-    M[2][1] = this->B[2];
+   for(int i=0; i<ROZMIAR; i++)
+    {
+        M[i][1] = this->B[i];
+    }
 
     return M;
 }
@@ -112,13 +114,14 @@ const Macierz UkladRownanLiniowych::ZamienY() const
     Zwraca:
         M - macierz z zamienioną trzecią kolumną
 */
-const Macierz UkladRownanLiniowych::ZamienZ() const
+Macierz UkladRownanLiniowych::ZamienZ() const
 {
     Macierz M = this->A;
 
-    M[0][2] = this->B[0];
-    M[1][2] = this->B[1];
-    M[2][2] = this->B[2];
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        M[i][2] = this->B[i];
+    }
 
     return M;
 }
@@ -131,7 +134,7 @@ const Macierz UkladRownanLiniowych::ZamienZ() const
     Zwraca:
         A - macierz
 */
-const Macierz UkladRownanLiniowych::wez_macierz() const
+Macierz UkladRownanLiniowych::wez_macierz() const
 {
     return this->A;
 }
@@ -157,7 +160,7 @@ void UkladRownanLiniowych::zmien_macierz(Macierz M)
     Zwraca:
         B - wektor
 */
-const Wektor UkladRownanLiniowych::wez_wektor() const
+Wektor UkladRownanLiniowych::wez_wektor() const
 {
     return this->B;
 }
@@ -183,7 +186,7 @@ void UkladRownanLiniowych::zmien_wektor(Wektor W)
     Zwraca:
         Wektor błędu
 */
-const Wektor UkladRownanLiniowych::Blad() const
+Wektor UkladRownanLiniowych::Blad() const
 {
     return this->A * this->Oblicz() - this->B;
 }
@@ -196,7 +199,7 @@ const Wektor UkladRownanLiniowych::Blad() const
     Zwraca:
         Długość wektora błędu
 */
-const double UkladRownanLiniowych::DlugoscBledu() const
+double UkladRownanLiniowych::DlugoscBledu() const
 {
     return this->Blad().dlugosc();
 }

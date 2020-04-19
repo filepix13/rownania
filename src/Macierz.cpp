@@ -1,6 +1,6 @@
 #include "Macierz.hh"
 #include <math.h>
-
+#include <algorithm>
 
 
 /* 
@@ -12,9 +12,9 @@
 */
 Macierz::Macierz()
 {
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < ROZMIAR; i++)
     {
-        for(int j = 0; j < 3; j++)
+        for(int j = 0; j < ROZMIAR; j++)
         {
             tab[i][j] = 0;
         }
@@ -141,19 +141,17 @@ double & Macierz::operator() (int ind1, int ind2)
     Zwraca:
         Mac - transponowana macierz
 */
-const Macierz Macierz::transpozycja2() const
+Macierz Macierz::transpozycja2() const
 {
     Macierz Mac;
 
-    Mac.tab[0][0] = this->tab[0][0];
-    Mac.tab[1][1] = this->tab[1][1];
-    Mac.tab[2][2] = this->tab[2][2];
-    Mac.tab[0][1] = this->tab[1][0];
-    Mac.tab[1][0] = this->tab[0][1];
-    Mac.tab[0][2] = this->tab[2][0];
-    Mac.tab[2][0] = this->tab[0][2];
-    Mac.tab[2][1] = this->tab[1][2];
-    Mac.tab[1][2] = this->tab[2][1];
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        for(int j=0; j<ROZMIAR; j++)
+        {
+            Mac.tab[i][j] = this->tab[j][i];
+        }
+    }
 
     return Mac;
 }
@@ -168,18 +166,11 @@ const Macierz Macierz::transpozycja2() const
 */
 void Macierz::transpozycja()
 {
-    double a,b,c;
-    a = this->tab[0][1];
-    b = this->tab[0][2];
-    c = this->tab[2][1];
-
-    this->tab[0][1] = this->tab[1][0];
-    this->tab[1][0] = a;
-    this->tab[0][2] = this->tab[2][0];
-    this->tab[2][0] = b;
-    this->tab[2][1] = this->tab[1][2];
-    this->tab[1][2] = c;
+    std::swap(this->tab[0][1], this->tab[1][0]);
+    std::swap(this->tab[0][2], this->tab[2][0]);
+    std::swap(this->tab[2][1], this->tab[1][2]);
 }
+
 
 
 /* 
@@ -208,7 +199,7 @@ double Macierz::Wyznacznik() const
     Zwraca:
         Mac - macierz odwócona
 */
-const Macierz Macierz::odwrotnosc() const
+Macierz Macierz::odwrotnosc() const
 {
     Macierz Mac;
     double det;
@@ -245,7 +236,7 @@ const Macierz Macierz::odwrotnosc() const
     Zwraca:
         Mac - suma dwóch macierzy wejściowych
 */
-const Macierz Macierz::operator + (const Macierz & M) const
+Macierz Macierz::operator + (const Macierz & M) const
 {
     Macierz Mac;
 
@@ -269,7 +260,7 @@ const Macierz Macierz::operator + (const Macierz & M) const
     Zwraca:
         Mac - różnica dwóch macierzy wejściowych
 */
-const Macierz Macierz::operator - (const Macierz & M) const
+Macierz Macierz::operator - (const Macierz & M) const
 {
     Macierz Mac;
 
@@ -293,7 +284,7 @@ const Macierz Macierz::operator - (const Macierz & M) const
     Zwraca:
         Mac - iloraz dwóch macierzy wejściowych
 */
-const Macierz Macierz::operator * (const Macierz & M) const
+Macierz Macierz::operator * (const Macierz & M) const
 {
    Macierz Mac;
 
@@ -317,7 +308,7 @@ const Macierz Macierz::operator * (const Macierz & M) const
     Zwraca:
         Wek - Iloraz macierzy i wektora wejściowego
 */
-const Wektor Macierz::operator * (const Wektor & W) const
+Wektor Macierz::operator * (const Wektor & W) const
 {
     Wektor Wek;
 
@@ -340,7 +331,11 @@ const Wektor Macierz::operator * (const Wektor & W) const
 */
 std::istream& operator >> (std::istream &Strm, Macierz &Mac)
 {
-    Strm >> Mac[0] >> Mac[1] >> Mac[2];
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Strm >> Mac[i];
+    }
+
     Mac.transpozycja();
     return Strm;
 }
@@ -358,5 +353,11 @@ std::ostream& operator << (std::ostream &Strm, const Macierz &Mac)
 {   
     Macierz M;
     M = Mac.transpozycja2();
-    return Strm << M[0] << std::endl << M[1] << std::endl << M[2] << std::endl;
+
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Strm << Mac[i] << std::endl;
+    }
+    
+    return Strm; 
 }
